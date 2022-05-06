@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Laggardly Sort 1.0</title>
+    <script type="text/javascript" src="script.js"></script>
+    <link rel="stylesheet" href="style.css">
+    
+</head>
+<body>
+    <p>v1.0 @davidnoo</p>
+ <div style="text-align: center;margin-top: 50px;">
+    <h3>Laggardly Sort</h3>
+    <!--Make sure the form has the autocomplete function switched off:-->
+<form autocomplete="off" action="">
+    <div class="autocomplete" style="width:300px;">
+      <input id="myInput" type="text" name="Templates" placeholder="Template">
+      <br><br>
+      <input id="myInput2" type="text" name="Words2Choose" placeholder="Words">
+      <br><br>
+      <input id="myInput3" type="text" name="2ndWord" placeholder="More Words" class="thirdField">
+    </div>
+  </form>
+  <button type="button" id="combinebtn">combine</button>
+    <button type="button" id="copyme">copy</button>
+  <div>
+      <p id="preview" class="cool-font"></p>
+  </div>
+ </div>
+ <!-- potentially add effect on copy later -->
+ <!-- <div style="text-align: center;margin-top: 50px;" class="thirdField" id="pebble">
+     <img src="glintstonepebble.png" alt="a glinstone pebble spell picture">
+</div> -->
+</body>
+<script>
+    var templates = ["**** ahead","Likely ****","If only I had a ****...","****, O ****","Ahh, ****...","No **** ahead","First off, ****","Didn't expect ****...","Behold, ****!","****","**** required ahead","Seek ****","Visions of ****...","Offer ****","Offer ****","****!","Be wary of ****","Still no ****...","Could this be a ****?","Praise the ****","Praise the ****","****?","Try ****","Why is it always ****?","Time for ****","Let there be ****","****..."];
+    var manywords =[ ",", "abundance", "ahead", "all the more", "ambush", "and then", "angel", "archer", "are you ready?", "aristocrat", "armament", "armor", "arms", "attacking", "back", "backstepping", "bad luck", "battle", "beast", "beating to a pulp", "beautiful...", "behind", "betrayal", "bird", "Birdseye Telescope", "bliss", "blocking", "blood loss", "bloodstain", "bog", "boss", "bow", "bravery", "bridge", "brief respite", "bright spot", "bug", "bug", "but", "butterfly", "by the way", "calmness", "camp site", "castle", "cavalier", "cave", "cellar", "cemetery", "center", "champion", "chaos", "checkpoint", "church", "circling around", "city", "clear sky", "cleric", "cliff", "climbable spot", "close-quarters battle", "clue", "coffin", "comfort", "confidence", "confusion", "core", "corpse", "crab", "cramped area", "critical hit", "crouching", "crowd", "crystal", "danger", "dark", "dark spot", "dashing through", "dastard", "dead end", "death", "Death", "decoy", "defeat", "defeating one-by-one", "defensible spot", "demi-human", "depths", "despair", "destruction", "detour", "distracted", "do it!", "dog", "don't give up", "don't think", "don't you dare!", "door", "down", "dragon", "dregs", "dung", "east", "edge", "Elden Ring", "enemy", "Erdtree", "evening", "evergaol", "except", "explosion", "faith", "fat coinpurse", "fear", "fingers", "fire", "fire", "fleeing", "flower", "forest", "fort", "fortitude", "friend", "friendship", "frost", "fruit", "futility", "gesturing", "giant", "giant sort", "give up", "god", "good fortune", "good luck", "good sort", "gorgeous view", "grace", "grass", "great tree", "group", "guard counter", "head", "healing", "help me...", "here again...", "here!", "hero", "hidden path", "hiding place", "high road", "high spot", "hole", "holy", "hope", "horse", "horseback battle", "house", "I can't take this...", "I did it!", "I don't believe it...", "I want to go home...", "I've failed...", "ill-omened creature", "in short", "incantation", "incantation", "injustice", "introspection", "invisible sort", "it's like a dream...", "item", "item crafting", "joy", "jump attack", "jumping", "jumping off", "just getting started", "keep moving", "key", "knight", "knight", "ladder", "laggardly sort", "lake", "left", "legs", "lever", "liar", "life", "lift", "light", "lightning", "listen carefully", "look carefully", "looking away", "lord", "lord", "lovable sort", "love", "lover", "loyalty", "luring out", "madness", "mage", "magic", "map", "master", "material", "merchant", "message", "mimicry", "misfortune", "mist", "monarch", "monarch", "monster", "monstrosity", "morning", "mountain", "mushroom", "necessary item", "nest", "night", "nimble sort", "noble", "noon", "north", "not here!", "octopus", "old codger", "old dear", "on the brink", "open area", "opportunity", "or", "Order", "ordnance", "out of stamina", "outsider", "overcast", "pack", "pair", "parrying", "pathetic sort", "patrolling", "pauper", "physical", "pickle", "piercing", "pincer attack", "plump sort", "poison", "prawn", "precious item", "procession", "projectile weapon", "pursuit", "rain", "ranged battle", "raptor", "rat", "recklessness", "recon spot", "regret", "reinforcements", "research", "resignation", "revenge", "right", "ritual", "river", "rolling", "rot", "ruin", "ruins", "rump", "running", "running attack", "rushing in", "sacrifice", "sadness", "safety", "sage", "samurai", "scarab", "scarlet rot", "secret", "secret passage", "seed", "seems familiar...", "sending gate", "sentry", "shield", "shortcut", "sinner", "skeleton", "skill", "skill", "skinny sort", "slashing", "sleep", "sleep", "slug", "snake", "sniper", "sniping spot", "snow", "so lonely...", "so to speak", "soldier", "something", "something incredible", "sorcerer", "sorcery", "sorcery", "sound", "south", "spiritspring", "standard", "stars", "stay calm", "stealth", "stomach", "stone astrolabe", "storm", "strange sort", "striking", "strong foe", "suffering", "summoning", "summoning", "surface", "surprise attack", "swordfighter", "tail", "taking on all at once", "talisman", "target lock", "Tarnished", "teacher", "tear", "tears", "therefore", "thief", "think carefully", "throwing", "too high up", "tower", "toxic", "traitor", "tranquility", "trap", "treasure chest", "tree", "trio", "tunnel", "turn back", "two-handing", "undead", "underground", "underground tomb", "unfathomable sort", "unguarded", "unnoticed", "up", "valley", "victory", "vigilance", "vigor", "warrior", "waterside", "weak foe", "well done", "west", "wicked sort", "wolf", "wraith", "wrath", "you don't have the right"]
+    // var countries3 =[ ",", "abundance", "ahead", "all the more", "ambush", "and then", "angel", "archer", "are you ready?", "aristocrat", "armament", "armor", "arms", "attacking", "back", "backstepping", "bad luck", "battle", "beast", "beating to a pulp", "beautiful...", "behind", "betrayal", "bird", "Birdseye Telescope", "bliss", "blocking", "blood loss", "bloodstain", "bog", "boss", "bow", "bravery", "bridge", "brief respite", "bright spot", "bug", "bug", "but", "butterfly", "by the way", "calmness", "camp site", "castle", "cavalier", "cave", "cellar", "cemetery", "center", "champion", "chaos", "checkpoint", "church", "circling around", "city", "clear sky", "cleric", "cliff", "climbable spot", "close-quarters battle", "clue", "coffin", "comfort", "confidence", "confusion", "core", "corpse", "crab", "cramped area", "critical hit", "crouching", "crowd", "crystal", "danger", "dark", "dark spot", "dashing through", "dastard", "dead end", "death", "Death", "decoy", "defeat", "defeating one-by-one", "defensible spot", "demi-human", "depths", "despair", "destruction", "detour", "distracted", "do it!", "dog", "don't give up", "don't think", "don't you dare!", "door", "down", "dragon", "dregs", "dung", "east", "edge", "Elden Ring", "enemy", "Erdtree", "evening", "evergaol", "except", "explosion", "faith", "fat coinpurse", "fear", "fingers", "fire", "fire", "fleeing", "flower", "forest", "fort", "fortitude", "friend", "friendship", "frost", "fruit", "futility", "gesturing", "giant", "giant sort", "give up", "god", "good fortune", "good luck", "good sort", "gorgeous view", "grace", "grass", "great tree", "group", "guard counter", "head", "healing", "help me...", "here again...", "here!", "hero", "hidden path", "hiding place", "high road", "high spot", "hole", "holy", "hope", "horse", "horseback battle", "house", "I can't take this...", "I did it!", "I don't believe it...", "I want to go home...", "I've failed...", "ill-omened creature", "in short", "incantation", "incantation", "injustice", "introspection", "invisible sort", "it's like a dream...", "item", "item crafting", "joy", "jump attack", "jumping", "jumping off", "just getting started", "keep moving", "key", "knight", "knight", "ladder", "laggardly sort", "lake", "left", "legs", "lever", "liar", "life", "lift", "light", "lightning", "listen carefully", "look carefully", "looking away", "lord", "lord", "lovable sort", "love", "lover", "loyalty", "luring out", "madness", "mage", "magic", "map", "master", "material", "merchant", "message", "mimicry", "misfortune", "mist", "monarch", "monarch", "monster", "monstrosity", "morning", "mountain", "mushroom", "necessary item", "nest", "night", "nimble sort", "noble", "noon", "north", "not here!", "octopus", "old codger", "old dear", "on the brink", "open area", "opportunity", "or", "Order", "ordnance", "out of stamina", "outsider", "overcast", "pack", "pair", "parrying", "pathetic sort", "patrolling", "pauper", "physical", "pickle", "piercing", "pincer attack", "plump sort", "poison", "prawn", "precious item", "procession", "projectile weapon", "pursuit", "rain", "ranged battle", "raptor", "rat", "recklessness", "recon spot", "regret", "reinforcements", "research", "resignation", "revenge", "right", "ritual", "river", "rolling", "rot", "ruin", "ruins", "rump", "running", "running attack", "rushing in", "sacrifice", "sadness", "safety", "sage", "samurai", "scarab", "scarlet rot", "secret", "secret passage", "seed", "seems familiar...", "sending gate", "sentry", "shield", "shortcut", "sinner", "skeleton", "skill", "skill", "skinny sort", "slashing", "sleep", "sleep", "slug", "snake", "sniper", "sniping spot", "snow", "so lonely...", "so to speak", "soldier", "something", "something incredible", "sorcerer", "sorcery", "sorcery", "sound", "south", "spiritspring", "standard", "stars", "stay calm", "stealth", "stomach", "stone astrolabe", "storm", "strange sort", "striking", "strong foe", "suffering", "summoning", "summoning", "surface", "surprise attack", "swordfighter", "tail", "taking on all at once", "talisman", "target lock", "Tarnished", "teacher", "tear", "tears", "therefore", "thief", "think carefully", "throwing", "too high up", "tower", "toxic", "traitor", "tranquility", "trap", "treasure chest", "tree", "trio", "tunnel", "turn back", "two-handing", "undead", "underground", "underground tomb", "unfathomable sort", "unguarded", "unnoticed", "up", "valley", "victory", "vigilance", "vigor", "warrior", "waterside", "weak foe", "well done", "west", "wicked sort", "wolf", "wraith", "wrath", "you don't have the right"]
+
+    autocomplete(document.getElementById("myInput"), templates);
+    autocomplete(document.getElementById("myInput2"), manywords);
+    autocomplete(document.getElementById("myInput3"), manywords);
+
+    document.getElementById("myInput2").addEventListener("focus", addField);
+    document.getElementById("combinebtn").addEventListener("click", updateField); 
+    document.getElementById("copyme").addEventListener("click", copyMyText);
+    
+
+    function addField () {
+        var thedata = document.getElementById("myInput").value;
+        if (thedata === "****, O ****") {
+            document.getElementById("myInput3").style.display = "block";
+        }
+    }
+    function updateField() {
+        var theText = document.getElementById("myInput").value;
+        var theWord = document.getElementById("myInput2").value;
+        var theWord2 = document.getElementById("myInput3").value;
+
+        console.log("the word 2 is" + theWord2)
+        if (theWord2.length > 0) {
+            var slicedWord = theText.slice(4,12);
+            slicedWord = theWord + " " + slicedWord;
+            document.getElementById("preview").innerHTML = slicedWord.replace("****",theWord);
+            var rawMessage = slicedWord.replace("****",theWord2);
+        } else {
+        document.getElementById("preview").innerHTML = theText.replace("****",theWord);
+            var rawMessage = theText.replace("****",theWord);
+        }
+
+        /////Update the font
+        const alphatest = {"A":"&#120198;","B":"&#120199;","C":"&#120200;","D":"&#120201;","E":"&#120202;","F":"&#120203;","G":"&#120204;","H":"&#120205;","I":"&#120206;","J":"&#120207;","K":"&#120208;","L":"&#120209;","M":"&#120210;","N":"&#120211;","O":"&#120212;","P":"&#120213;","Q":"&#120214;","R":"&#120215;","S":"&#120216;","T":"&#120217;","U":"&#120218;","V":"&#120219;","W":"&#120220;","X":"&#120221;","Y":"&#120222;","Z":"&#120223;"}
+        var myp = rawMessage
+        myp = myp.toUpperCase();
+
+        //Variable to hold the message
+        var message = "";
+
+        //Turn myp into an array
+        mypArray = [...myp]
+
+        //Testing
+        for (let i in mypArray) {
+            console.log("The value is " + mypArray[i])
+
+            //create variable to hold that value
+            var b = mypArray[i]
+            console.log("The coordinating key is" + alphatest[b])
+
+        if (alphatest[b] != undefined) {
+            message += alphatest[b];
+            } else {
+                message += mypArray[i]
+            }
+        }
+        document.getElementById("preview").innerHTML = message;
+
+    }
+
+    function copyMyText() {
+     /* Get the text field */
+        var copyText = document.getElementById("preview").innerHTML;
+        console.log("the copy text is" + copyText);
+            //Add animation
+            // document.getElementById("pebble").classList.remove('thirdField');
+            // document.getElementById("pebble").classList.add('animated');
+
+
+        /* Copy the text inside the text field */
+        navigator.clipboard.writeText(copyText);
+
+    }
+
+    </script>
+</html>
+
+
+
