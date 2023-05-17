@@ -76,10 +76,14 @@ input[type=submit] {
 }
 
 @media screen and (orientation:portrait) {
+  #testTurn {
      background-color: lightblue;
+  }
 }
 
 @media screen and (orientation:portrait) {
+    #testTurn {
       background-color: red;
+  }
 }
 
