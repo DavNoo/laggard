@@ -69,3 +69,17 @@ input[type=submit] {
   0% {left:0px; top: 0px;}
   100% {opacity: 0;}
 }
+
+#testTurn {
+  margin: auto;
+  width: 100%;
+}
+
+@media screen and (orientation:portrait) {
+     background-color: lightblue;
+}
+
+@media screen and (orientation:portrait) {
+      background-color: red;
+}
+
